@@ -31,6 +31,12 @@ const hRestartButton = document.querySelector(".btn--new");
 const hHoldButton = document.querySelector(".btn--hold");
 const hRollButton = document.querySelector(".btn--roll");
 
+// TODO: Borrar funciones RestartFinalScoreText y RestartCurrentScore 🔴
+// FIXME: Cambiar nombres de variables 🔴
+
+// Declarando variables;
+let nRandomNumber, aScore, nCurrentScore, nPlayerActive, bSwitchTurn;
+
 // D.Y.R
 function SwitchPlayers() {
   hPlayer1.classList.toggle("player--active");
@@ -49,16 +55,38 @@ function RestartCurrentScore() {
 }
 
 // Usando propiedades
-hDice.classList.add("hide");
-RestartFinalScoreText();
 
-// Declarando variables
-let nRandomNumber = Math.trunc(Math.random() * 6) + 1;
-let aScore = [0, 0];
-let nCurrentScore = 0;
-let nPlayerActive = 0;
-let bSwitchTurn = 1;
-let = nChangeNumber = hDice.src = `./Images/dice-${nRandomNumber}.png`;
+// RestartFinalScoreText();
+Initialize();
+// ThrowDice();
+// SaveCurrentScore();
+
+/* 
+function ThrowDice() {
+  // Si "jugador activo" es verdadero, entonces iniciar como jugador 1, si no, como jugador 2.
+  if (bSwitchTurn) {
+    hDice.classList.remove("hide");
+    nRandomNumber = Math.trunc(Math.random() * 6) + 1;
+    hDice.src = `./Images/dice-${nRandomNumber}.png`;
+    // Claw Guards: Siempre revisar 1ro el resultado que no se quiere obtener
+    if (nRandomNumber === 1) {
+      nCurrentScore = 0;
+      document.querySelector(`#current--${nPlayerActive}`).textContent = 0;
+      // function RestartCurrentScore() {
+      //   hCurrentScorePlayer1.textContent = 0;
+      //   hCurrentScorePlayer2.textContent = 0;
+      // }
+      // Cambiar de jugador
+      SwitchPlayers();
+      return; // Termina la función, y el usuario vuelve a iniciarla al darle click al botón de nuevo.
+    }
+    nCurrentScore += nRandomNumber;
+    document.querySelector(`#current--${nPlayerActive}`).textContent =
+      nCurrentScore;
+  }
+} 
+
+hRollButton.addEventListener("click", ThrowDice);*/
 
 hRollButton.addEventListener("click", function () {
   // Si "jugador activo" es verdadero, entonces iniciar como jugador 1, si no, como jugador 2.
@@ -83,6 +111,36 @@ hRollButton.addEventListener("click", function () {
       nCurrentScore;
   }
 });
+
+// function SaveCurrentScore() {
+//   if (bSwitchTurn) {
+//     aScore[nPlayerActive] += nCurrentScore;
+//     document.querySelector(`#score--${nPlayerActive}`).textContent =
+//       aScore[nPlayerActive];
+//     nCurrentScore = 0;
+//     document.querySelector(`#current--${nPlayerActive}`).textContent = 0;
+//     // Ganador
+
+//     if (aScore[nPlayerActive] >= 1) {
+//       document
+//         .querySelector(`.player--${nPlayerActive}`)
+//         .classList.add("player--winner");
+//       document
+//         .querySelector(`#score--${nPlayerActive}`)
+//         .classList.add("mainScoreText");
+//       document
+
+//         .querySelector(`.player--${nPlayerActive}`)
+//         .classList.remove("player--active");
+//       hDice.classList.add("hide");
+//       bSwitchTurn = 0;
+//     } else {
+//       SwitchPlayers();
+//     }
+//   }
+// }
+
+// hHoldButton.addEventListener("click", SaveCurrentScore);
 
 hHoldButton.addEventListener("click", function () {
   if (bSwitchTurn) {
@@ -112,16 +170,25 @@ hHoldButton.addEventListener("click", function () {
   }
 });
 
-hRestartButton.addEventListener("click", function () {
+function Initialize() {
+  aScore = [0, 0];
+  nCurrentScore = 0;
+  nPlayerActive = 0;
+  bSwitchTurn = 1;
   RestartCurrentScore();
   hDice.classList.add("hide");
   RestartFinalScoreText();
-  aScore[0] = 0;
-  aScore[1] = 0;
+  // aScore[0] = 0;
+  // aScore[1] = 0;
+  // aScore [0, 1] = 0;
   hPlayer1.classList.add("player--active");
   hPlayer2.classList.remove("player--active");
   hPlayer1.classList.remove("player--winner");
   hPlayer2.classList.remove("player--winner");
   nPlayerActive = 0;
   bSwitchTurn = 1;
-});
+}
+
+hRestartButton.addEventListener("click", Initialize);
+
+//Initialize();

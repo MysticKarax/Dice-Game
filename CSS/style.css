@@ -34,11 +34,12 @@ main {
   border-radius: 9px;
   overflow: hidden;
   display: flex;
-  background-image: url("../Images/silverWolf.png"); 
+  background-image: url("../Images/silverWolf.png");
    background-size: cover; 
    background-position: center; 
    background-repeat: no-repeat;
 }
+
 .player {
   flex: 50%;
   padding: 9rem;
@@ -124,11 +125,11 @@ main {
   box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
 }
 
-.btn::first-letter {
+/* .btn::first-letter {
   font-size: 2.4rem;
   display: inline-block;
   margin-right: 0.7rem;
-}
+} */
 
 .btn--new {
   top: 4rem;
@@ -140,14 +141,14 @@ main {
   top: 46.1rem;
 }
 
-.btn:active {
+/* .btn:active {
     transform: translate(-50%, 3px);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
 
 .btn:focus {
 outline: none;
-}
+} */
 
 .dice {
 position: absolute;
@@ -170,12 +171,17 @@ color: #344dc3;
 .player--winner .mainScoreText {
   color: #7e40c7;
 }
-/* 
-Main Score Text color: color: #7e40c7;
-New Player Winner name color: #344dc3;
-*/
 
 .hide {
   display: none;
 }
 
+* button:hover {
+  transition: background 250ms, transform 250ms;
+  background-color: #d4aadb;
+}
+
+* button:active {
+  transition: background 250ms;
+  background-color: #b36cbe;
+}
